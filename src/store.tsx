@@ -18,7 +18,7 @@ import type {
   User,
 } from './types'
 
-const STORAGE_KEY = 'renshu-match-v1'
+const STORAGE_KEY = 'renshu-match-v2'
 
 function loadState(): AppState {
   try {
@@ -190,7 +190,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
         fromUserId: currentUser.id,
         fromName: currentUser.name,
         amount,
-        message: message.trim() || 'がんばれ！',
+        message: message.trim() || '応援しています',
         createdAt: new Date().toISOString(),
       }
       setState((s) => ({

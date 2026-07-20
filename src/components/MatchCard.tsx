@@ -3,7 +3,7 @@ import { getSport } from '../data/sports'
 import type { MatchRequest } from '../types'
 
 const STATUS_LABEL: Record<string, string> = {
-  open: '相手募集中',
+  open: '募集中',
   matched: '対戦決定',
   done: '終了',
 }
@@ -21,11 +21,11 @@ export function MatchCard({ match, index = 0 }: { match: MatchRequest; index?: n
     <Link
       to={`/matches/${match.id}`}
       className="match-card"
-      style={{ animationDelay: `${Math.min(index, 8) * 0.05}s` }}
+      style={{ animationDelay: `${Math.min(index, 8) * 0.04}s` }}
     >
       <div className="match-card-top">
         <span className="sport-badge" style={{ background: sport.color }}>
-          {sport.emoji} {sport.label}
+          {sport.label}
         </span>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', justifyContent: 'flex-end' }}>
           {!match.isPublic && <span className="status-tag private">非公開</span>}
@@ -37,16 +37,16 @@ export function MatchCard({ match, index = 0 }: { match: MatchRequest; index?: n
 
       <div className="match-meta">
         <div>
-          📅 <strong>{formatDate(match.date)}</strong> {match.time}〜
+          <strong>{formatDate(match.date)}</strong> {match.time}〜
         </div>
         <div>
-          📍 <strong>{match.area}</strong> / {match.place}
+          {match.area} / {match.place}
         </div>
       </div>
 
       <div className="match-foot">
-        <span className="cheer-count">🪙 {match.cheerTotal.toLocaleString()}</span>
-        <span style={{ color: 'var(--green)', fontWeight: 800, fontSize: '0.9rem' }}>くわしく →</span>
+        <span className="cheer-count">Tip {match.cheerTotal.toLocaleString()}</span>
+        <span style={{ color: 'var(--accent)', fontWeight: 700, fontSize: '0.86rem' }}>詳細</span>
       </div>
     </Link>
   )

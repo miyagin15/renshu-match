@@ -5,7 +5,7 @@ import { getSport } from '../data/sports'
 import { useStore } from '../store'
 
 const STATUS_LABEL = {
-  open: '相手募集中',
+  open: '募集中',
   matched: '対戦決定',
   done: '終了',
 } as const
@@ -63,48 +63,47 @@ export function MatchDetail() {
         style={{ padding: '8px 14px', marginBottom: 12 }}
         onClick={() => navigate(-1)}
       >
-        ← 戻る
+        戻る
       </button>
 
       <article className="detail-hero">
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
           <span className="sport-badge" style={{ background: sport.color }}>
-            {sport.emoji} {sport.label}
+            {sport.label}
           </span>
           {!match.isPublic && <span className="status-tag private">非公開</span>}
           <span className={`status-tag ${match.status}`}>{STATUS_LABEL[match.status]}</span>
         </div>
 
-        <h1>{match.hostTeamName} の練習試合</h1>
+        <h1>{match.hostTeamName}</h1>
+        <p style={{ margin: 0, color: 'var(--muted)' }}>練習試合の募集</p>
 
         <div className="vs">
           <div className="team">
-            <div style={{ fontSize: '0.8rem', color: 'var(--muted)' }}>主催</div>
+            <div style={{ fontSize: '0.75rem', color: 'var(--muted)', marginBottom: 4 }}>主催</div>
             <div>{match.hostTeamName}</div>
           </div>
           <div className="mark">VS</div>
           <div className="team">
-            <div style={{ fontSize: '0.8rem', color: 'var(--muted)' }}>相手</div>
-            <div>{match.opponentTeamName ?? '募集中…'}</div>
+            <div style={{ fontSize: '0.75rem', color: 'var(--muted)', marginBottom: 4 }}>相手</div>
+            <div>{match.opponentTeamName ?? '未定'}</div>
           </div>
         </div>
 
         <div className="match-meta" style={{ marginBottom: 16 }}>
           <div>
-            📅 <strong>{formatDate(match.date)}</strong> {match.time}〜
+            <strong>{formatDate(match.date)}</strong> {match.time}〜
           </div>
           <div>
-            📍 <strong>{match.area}</strong> / {match.place}
+            {match.area} / {match.place}
           </div>
           {match.note && (
-            <div style={{ marginTop: 8, lineHeight: 1.55 }}>
-              💬 {match.note}
-            </div>
+            <div style={{ marginTop: 10, lineHeight: 1.65, color: 'var(--ink)' }}>{match.note}</div>
           )}
         </div>
 
-        <div className="cheer-count" style={{ marginBottom: 16, fontSize: '1.05rem' }}>
-          🪙 応援合計 {match.cheerTotal.toLocaleString()} コイン
+        <div className="cheer-count" style={{ marginBottom: 16 }}>
+          応援チップ合計 {match.cheerTotal.toLocaleString()}
         </div>
 
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10 }}>
@@ -114,7 +113,7 @@ export function MatchDetail() {
               className="btn btn-solid"
               onClick={() => {
                 const ok = applyToMatch(match.id)
-                flash(ok ? '応募しました！対戦が決まりました' : '応募できませんでした')
+                flash(ok ? '応募が完了し、対戦が決まりました' : '応募できませんでした')
               }}
             >
               この試合に応募する
@@ -122,7 +121,7 @@ export function MatchDetail() {
           )}
           {canCheer && (
             <button type="button" className="btn btn-coral" onClick={() => setCheerOpen(true)}>
-              🪙 投げ銭で応援
+              応援チップを送る
             </button>
           )}
           {!currentUser && (
@@ -139,7 +138,7 @@ export function MatchDetail() {
                 flash('試合を終了にしました')
               }}
             >
-              試合終了にする
+              試合を終了する
             </button>
           )}
         </div>
@@ -148,8 +147,8 @@ export function MatchDetail() {
           currentUser.sport !== match.sport &&
           !isHost &&
           match.status === 'open' && (
-            <p style={{ marginBottom: 0, marginTop: 14, color: 'var(--muted)', fontWeight: 700 }}>
-              ※ 同じスポーツの監督だけ応募できます（あなたのスポーツ: {getSport(currentUser.sport).label}）
+            <p style={{ marginBottom: 0, marginTop: 14, color: 'var(--muted)', fontWeight: 600 }}>
+              同じ競技の監督・コーチのみ応募できます（現在: {getSport(currentUser.sport).label}）
             </p>
           )}
       </article>
@@ -158,11 +157,11 @@ export function MatchDetail() {
         <div className="section-head">
           <div>
             <h2>応援メッセージ</h2>
-            <p>ファンからの投げ銭</p>
+            <p>サポーターからのチップ</p>
           </div>
         </div>
         {cheers.length === 0 ? (
-          <div className="empty">まだ応援はありません。最初の1人になろう！</div>
+          <div className="empty">まだ応援はありません</div>
         ) : (
           <div className="cheer-list">
             {cheers.map((c) => (
@@ -172,7 +171,7 @@ export function MatchDetail() {
                   <strong>{c.fromName}</strong>
                   <p className="msg">{c.message}</p>
                 </div>
-                <div className="amount">🪙 {c.amount}</div>
+                <div className="amount">{c.amount}</div>
               </div>
             ))}
           </div>

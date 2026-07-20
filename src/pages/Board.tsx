@@ -18,9 +18,9 @@ export function Board() {
   return (
     <>
       <h1 className="page-title">試合一覧</h1>
-      <p className="page-sub">公開中の練習試合と、あなた向けの非公開募集</p>
+      <p className="page-sub">公開募集と、あなたに表示される非公開募集</p>
 
-      <div className="filters" role="tablist" aria-label="スポーツで絞り込み">
+      <div className="filters" role="tablist" aria-label="競技で絞り込み">
         <button
           type="button"
           className={`chip ${filter === 'all' ? 'active' : ''}`}
@@ -35,16 +35,13 @@ export function Board() {
             className={`chip ${filter === s.id ? 'active' : ''}`}
             onClick={() => setFilter(s.id)}
           >
-            {s.emoji} {s.label}
+            {s.label}
           </button>
         ))}
       </div>
 
       {display.length === 0 ? (
-        <div className="empty">
-          <div style={{ fontSize: '2rem', marginBottom: 8 }}>📭</div>
-          この条件の試合はまだありません
-        </div>
+        <div className="empty">条件に合う試合はまだありません</div>
       ) : (
         <div className="match-list">
           {display.map((m, i) => (

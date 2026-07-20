@@ -22,20 +22,20 @@ export function Register() {
 
   return (
     <>
-      <h1 className="page-title">はじめる</h1>
-      <p className="page-sub">スポーツと役割を選んで、すぐ使えます</p>
+      <h1 className="page-title">ログイン / 登録</h1>
+      <p className="page-sub">役割と競技を選んで利用を開始できます</p>
 
       {currentUser && (
         <div className="demo-banner" style={{ marginBottom: 18 }}>
-          いまは {currentUser.name}（{currentUser.role === 'coach' ? '監督' : 'ファン'}）でログイン中
+          現在: {currentUser.name}（{currentUser.role === 'coach' ? '監督・コーチ' : 'サポーター'}）
         </div>
       )}
 
       <section className="section">
         <div className="section-head">
           <div>
-            <h2>デモ用かんたんログイン</h2>
-            <p>作らずにすぐ試せます</p>
+            <h2>デモアカウント</h2>
+            <p>登録なしですぐに操作を確認できます</p>
           </div>
         </div>
         <div className="quick-login">
@@ -50,9 +50,9 @@ export function Register() {
                   navigate('/board')
                 }}
               >
-                {s.emoji} {u.name}
+                {u.name}
                 <small>
-                  {u.role === 'coach' ? '監督' : 'ファン'} / {u.teamName} / {s.label}
+                  {u.role === 'coach' ? '監督・コーチ' : 'サポーター'} / {u.teamName} / {s.label}
                 </small>
               </button>
             )
@@ -63,20 +63,20 @@ export function Register() {
       <section className="section">
         <div className="section-head">
           <div>
-            <h2>新しく登録</h2>
-            <p>名前とスポーツを選ぶだけ</p>
+            <h2>新規登録</h2>
+            <p>表示名と競技を設定</p>
           </div>
         </div>
         <form className="form-card form-grid" onSubmit={onSubmit}>
           <div className="field">
-            <label>あなたは？</label>
+            <label>役割</label>
             <div className="role-grid">
               <button
                 type="button"
                 className={`choice ${role === 'coach' ? 'active' : ''}`}
                 onClick={() => setRole('coach')}
               >
-                <span className="big">🧢</span>
+                <span className="big">Coach</span>
                 監督・コーチ
               </button>
               <button
@@ -84,14 +84,14 @@ export function Register() {
                 className={`choice ${role === 'fan' ? 'active' : ''}`}
                 onClick={() => setRole('fan')}
               >
-                <span className="big">📣</span>
-                ファン・応援
+                <span className="big">Fan</span>
+                サポーター
               </button>
             </div>
           </div>
 
           <div className="field">
-            <label>スポーツ</label>
+            <label>競技</label>
             <div className="sport-grid">
               {SPORTS.map((s) => (
                 <button
@@ -100,7 +100,6 @@ export function Register() {
                   className={`choice ${sport === s.id ? 'active' : ''}`}
                   onClick={() => setSport(s.id)}
                 >
-                  <span className="big">{s.emoji}</span>
                   {s.label}
                 </button>
               ))}
@@ -108,12 +107,12 @@ export function Register() {
           </div>
 
           <div className="field">
-            <label htmlFor="name">ニックネーム</label>
+            <label htmlFor="name">表示名</label>
             <input
               id="name"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              placeholder="例: たろうコーチ"
+              placeholder="例: 田中 翔"
               required
               maxLength={20}
             />
@@ -121,14 +120,16 @@ export function Register() {
 
           <div className="field">
             <label htmlFor="team">
-              {role === 'coach' ? 'チーム名' : '推しチーム名（任意）'}
+              {role === 'coach' ? 'チーム名' : '応援チーム（任意）'}
             </label>
             <input
               id="team"
               value={teamName}
               onChange={(e) => setTeamName(e.target.value)}
-              placeholder={role === 'coach' ? '例: 青空スターズ' : '例: 青空スターズ'}
-              maxLength={30}
+              placeholder={
+                role === 'coach' ? '例: ○○高校 硬式野球部' : '例: ○○高校 硬式野球部'
+              }
+              maxLength={40}
             />
           </div>
 
@@ -144,7 +145,7 @@ export function Register() {
           </div>
 
           <button type="submit" className="btn btn-solid btn-block">
-            登録してはじめる
+            登録して開始
           </button>
         </form>
       </section>

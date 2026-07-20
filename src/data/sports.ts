@@ -1,12 +1,12 @@
 import type { Sport } from '../types'
 
 export const SPORTS: Sport[] = [
-  { id: 'baseball', label: '野球', emoji: '⚾', color: '#E85D04' },
-  { id: 'soccer', label: 'サッカー', emoji: '⚽', color: '#2D6A4F' },
-  { id: 'volleyball', label: 'バレーボール', emoji: '🏐', color: '#0077B6' },
-  { id: 'basketball', label: 'バスケ', emoji: '🏀', color: '#C1121F' },
-  { id: 'softball', label: 'ソフトボール', emoji: '🥎', color: '#F4A261' },
-  { id: 'tennis', label: 'テニス', emoji: '🎾', color: '#40916C' },
+  { id: 'baseball', label: '野球', emoji: '', color: '#C45C26' },
+  { id: 'soccer', label: 'サッカー', emoji: '', color: '#1F6B4A' },
+  { id: 'volleyball', label: 'バレーボール', emoji: '', color: '#1A6FA8' },
+  { id: 'basketball', label: 'バスケ', emoji: '', color: '#B42318' },
+  { id: 'softball', label: 'ソフトボール', emoji: '', color: '#A86B2D' },
+  { id: 'tennis', label: 'テニス', emoji: '', color: '#2F7A52' },
 ]
 
 export function getSport(id: string): Sport {
@@ -26,8 +26,8 @@ export const AREAS = [
 ]
 
 export const CHEER_PRESETS = [
-  { amount: 100, label: 'がんばれ！', emoji: '👏' },
-  { amount: 300, label: 'ナイスプレー', emoji: '🔥' },
-  { amount: 500, label: '優勝祈願', emoji: '⭐' },
-  { amount: 1000, label: '熱い応援', emoji: '💖' },
+  { amount: 100, label: '応援しています', emoji: '' },
+  { amount: 300, label: 'いい試合を', emoji: '' },
+  { amount: 500, label: '勝利を祈って', emoji: '' },
+  { amount: 1000, label: '全力サポート', emoji: '' },
 ]

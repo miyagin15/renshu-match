@@ -10,9 +10,9 @@ export function Home() {
     <>
       <section className="hero">
         <p className="hero-brand">れんしゅマッチ</p>
-        <h1>練習試合の相手、ここで見つかる。</h1>
+        <h1>練習試合の調整を、知り合いづてから解放する。</h1>
         <p>
-          電話や知り合いだけじゃなく、公開された募集から相手チームを探せます。ファンは試合を見て、投げ銭で応援もできます。
+          監督・コーチ同士が公開募集で相手を見つけ、日程と会場をスムーズに決められます。サポーターは公開試合を見て、応援チップを送れます。
         </p>
         <div className="hero-actions">
           {currentUser ? (
@@ -29,10 +29,10 @@ export function Home() {
           ) : (
             <>
               <Link to="/register" className="btn btn-primary">
-                無料ではじめる
+                アカウント作成
               </Link>
               <Link to="/board" className="btn btn-secondary">
-                公開試合をのぞく
+                公開試合を見る
               </Link>
             </>
           )}
@@ -40,24 +40,24 @@ export function Home() {
       </section>
 
       <div className="demo-banner">
-        <span>🎮 デモです。データはこの端末に保存されます。</span>
-        <Link to="/register" style={{ color: 'var(--green-deep)', fontWeight: 800 }}>
-          かんたんログイン →
+        <span>デモ版 — データはこの端末にのみ保存されます</span>
+        <Link to="/register" style={{ color: 'var(--accent-deep)', fontWeight: 700 }}>
+          デモログイン
         </Link>
       </div>
 
       <section className="section">
         <div className="section-head">
           <div>
-            <h2>いま公開中の練習試合</h2>
-            <p>だれでも見られる募集です</p>
+            <h2>公開中の練習試合</h2>
+            <p>高校・大学・クラブの募集</p>
           </div>
-          <Link to="/board" style={{ color: 'var(--green)', fontWeight: 800 }}>
-            すべて
+          <Link to="/board" style={{ color: 'var(--accent)', fontWeight: 700 }}>
+            すべて見る
           </Link>
         </div>
         {publicOpen.length === 0 ? (
-          <div className="empty">まだ公開中の試合がありません</div>
+          <div className="empty">公開中の試合はまだありません</div>
         ) : (
           <div className="match-list">
             {publicOpen.map((m, i) => (
@@ -71,36 +71,36 @@ export function Home() {
         <div className="section-head">
           <div>
             <h2>できること</h2>
-            <p>小中学生でもかんたん</p>
+            <p>部活・サークル・クラブ向け</p>
           </div>
         </div>
         <div className="match-list">
           <div className="match-card">
-            <div style={{ fontSize: '1.8rem' }}>🤝</div>
-            <h3 className="match-title">監督どうしで調整</h3>
-            <p style={{ margin: 0, color: 'var(--muted)' }}>
-              日程・場所を出して、相手チームからの応募を受けられます。仲良し以外のチームともつながれます。
+            <div className="feature-label">Matchmaking</div>
+            <h3 className="match-title">監督同士の日程調整</h3>
+            <p style={{ margin: 0, color: 'var(--muted)', lineHeight: 1.6 }}>
+              日時・会場を出して応募を受け付け。既存のつながり以外のチームとも対戦相手を探せます。
             </p>
           </div>
           <div className="match-card">
-            <div style={{ fontSize: '1.8rem' }}>🔒</div>
+            <div className="feature-label">Visibility</div>
             <h3 className="match-title">公開 / 非公開</h3>
-            <p style={{ margin: 0, color: 'var(--muted)' }}>
-              広く募集したい試合は公開、仲良し限定は非公開。見せたい相手だけに絞れます。
+            <p style={{ margin: 0, color: 'var(--muted)', lineHeight: 1.6 }}>
+              広く相手を募る場合は公開、既存チーム限定なら非公開。表示範囲を選べます。
             </p>
           </div>
           <div className="match-card">
-            <div style={{ fontSize: '1.8rem' }}>🪙</div>
-            <h3 className="match-title">ファンの投げ銭</h3>
-            <p style={{ margin: 0, color: 'var(--muted)' }}>
-              サポーターは公開試合を見て、応援コインでメッセージ付きの応援が送れます（デモ）。
+            <div className="feature-label">Support</div>
+            <h3 className="match-title">サポーターの応援チップ</h3>
+            <p style={{ margin: 0, color: 'var(--muted)', lineHeight: 1.6 }}>
+              公開試合にメッセージ付きのチップを送れます。決済連携なしのデモ機能です。
             </p>
           </div>
           <div className="match-card">
-            <div style={{ fontSize: '1.8rem' }}>🏅</div>
-            <h3 className="match-title">いろんなスポーツ</h3>
-            <p style={{ margin: 0, color: 'var(--muted)' }}>
-              野球・サッカー・バレー・バスケなど。登録時にスポーツを選びます。
+            <div className="feature-label">Sports</div>
+            <h3 className="match-title">複数競技対応</h3>
+            <p style={{ margin: 0, color: 'var(--muted)', lineHeight: 1.6 }}>
+              野球・サッカー・バレー・バスケなど。登録時に競技を選択します。
             </p>
           </div>
         </div>

@@ -9,11 +9,10 @@ export function MyPage() {
   if (!currentUser) {
     return (
       <div className="empty">
-        <div style={{ fontSize: '2rem', marginBottom: 8 }}>👤</div>
-        まだログインしていません
+        ログインしていません
         <div style={{ marginTop: 16, display: 'flex', gap: 10, justifyContent: 'center', flexWrap: 'wrap' }}>
           <Link to="/register" className="btn btn-solid">
-            はじめる
+            ログイン
           </Link>
           <Link to="/board" className="btn btn-ghost">
             公開試合を見る
@@ -31,14 +30,14 @@ export function MyPage() {
     <>
       <h1 className="page-title">{currentUser.name}</h1>
       <p className="page-sub">
-        {sport.emoji} {sport.label} / {currentUser.role === 'coach' ? '監督' : 'ファン'} /{' '}
+        {sport.label} / {currentUser.role === 'coach' ? '監督・コーチ' : 'サポーター'} /{' '}
         {currentUser.teamName}（{currentUser.area}）
       </p>
 
       <div className="stat-row">
         <div className="stat">
           <div className="n">{currentUser.coins.toLocaleString()}</div>
-          <div className="l">コイン</div>
+          <div className="l">Tip残高</div>
         </div>
         <div className="stat">
           <div className="n">{openCount}</div>
@@ -52,7 +51,7 @@ export function MyPage() {
 
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, marginBottom: 22 }}>
         <button type="button" className="btn btn-primary" onClick={() => addCoins(1000)}>
-          🪙 +1000 チャージ（デモ）
+          +1000 デモチャージ
         </button>
         {currentUser.role === 'coach' && (
           <Link to="/create" className="btn btn-solid">
@@ -86,14 +85,14 @@ export function MyPage() {
         <div className="section-head">
           <div>
             <h2>デモ操作</h2>
-            <p>共有・再体験用</p>
+            <p>初期データに戻す</p>
           </div>
         </div>
         <button
           type="button"
           className="btn btn-ghost btn-block"
           onClick={() => {
-            if (confirm('デモデータを最初の状態に戻しますか？')) resetDemo()
+            if (confirm('デモデータを初期状態に戻しますか？')) resetDemo()
           }}
         >
           データをリセット

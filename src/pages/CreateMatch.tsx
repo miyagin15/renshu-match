@@ -28,11 +28,10 @@ export function CreateMatch() {
   if (!currentUser) {
     return (
       <div className="empty">
-        <div style={{ fontSize: '2rem', marginBottom: 8 }}>🧢</div>
-        試合を募集するにはログインが必要です
+        募集にはログインが必要です
         <div style={{ marginTop: 16 }}>
           <Link to="/register" className="btn btn-solid">
-            はじめる
+            ログイン
           </Link>
         </div>
       </div>
@@ -42,8 +41,7 @@ export function CreateMatch() {
   if (currentUser.role !== 'coach') {
     return (
       <div className="empty">
-        <div style={{ fontSize: '2rem', marginBottom: 8 }}>📣</div>
-        ファンアカウントでは募集できません。試合を見て投げ銭で応援しよう！
+        サポーターアカウントでは募集できません。試合一覧から応援チップを送れます。
         <div style={{ marginTop: 16 }}>
           <Link to="/board" className="btn btn-solid">
             試合一覧へ
@@ -57,7 +55,7 @@ export function CreateMatch() {
     e.preventDefault()
     setError('')
     if (!place.trim()) {
-      setError('場所を入れてください')
+      setError('会場を入力してください')
       return
     }
     const match = createMatch({ date, time, place, area, note, isPublic })
@@ -72,7 +70,7 @@ export function CreateMatch() {
     <>
       <h1 className="page-title">試合を募集</h1>
       <p className="page-sub">
-        {sport?.emoji} {sport?.label} / {currentUser.teamName}
+        {sport?.label} / {currentUser.teamName}
       </p>
 
       <form className="form-card form-grid" onSubmit={onSubmit}>
@@ -98,35 +96,35 @@ export function CreateMatch() {
         </div>
 
         <div className="field">
-          <label htmlFor="place">場所</label>
+          <label htmlFor="place">会場</label>
           <input
             id="place"
             value={place}
             onChange={(e) => setPlace(e.target.value)}
-            placeholder="例: ○○中央グラウンド"
+            placeholder="例: 大学グラウンドA面"
             required
             maxLength={60}
           />
         </div>
 
         <div className="field">
-          <label htmlFor="note">ひとこと（任意）</label>
+          <label htmlFor="note">備考（任意）</label>
           <textarea
             id="note"
             value={note}
             onChange={(e) => setNote(e.target.value)}
-            placeholder="学年・雨天時・持ち物など"
+            placeholder="対象カテゴリ、所要時間、雨天時の扱いなど"
             maxLength={200}
           />
         </div>
 
         <div className="toggle-row">
           <div>
-            <strong>{isPublic ? '🌍 公開する' : '🔒 非公開にする'}</strong>
+            <strong>{isPublic ? '公開する' : '非公開にする'}</strong>
             <span>
               {isPublic
-                ? 'だれでも一覧で見られます'
-                : 'あなた（と対戦相手）だけが見られます'}
+                ? '一覧に表示され、誰でも閲覧できます'
+                : '主催者と対戦相手のみ表示されます'}
             </span>
           </div>
           <label className="switch">
@@ -139,10 +137,10 @@ export function CreateMatch() {
           </label>
         </div>
 
-        {error && <p style={{ color: 'var(--coral)', fontWeight: 700, margin: 0 }}>{error}</p>}
+        {error && <p style={{ color: 'var(--danger)', fontWeight: 700, margin: 0 }}>{error}</p>}
 
         <button type="submit" className="btn btn-solid btn-block">
-          募集を出す
+          募集を公開
         </button>
       </form>
     </>

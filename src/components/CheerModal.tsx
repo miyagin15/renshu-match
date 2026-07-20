@@ -31,7 +31,7 @@ export function CheerModal({
     setError('')
     const ok = sendCheer(matchId, amount, message)
     if (!ok) {
-      setError('コインが足りません。マイページでチャージできます（デモ）。')
+      setError('残高が不足しています。マイページからデモチャージできます。')
       return
     }
     setDone(true)
@@ -48,16 +48,15 @@ export function CheerModal({
         onClick={(e) => e.stopPropagation()}
       >
         {done ? (
-          <div style={{ textAlign: 'center', padding: '20px 0' }}>
-            <div style={{ fontSize: '3rem' }}>🎉</div>
-            <h3>応援ありがとう！</h3>
-            <p className="sub">{teamName} に気持ちが届きました</p>
+          <div style={{ textAlign: 'center', padding: '16px 0' }}>
+            <h3>送信しました</h3>
+            <p className="sub">{teamName} へのサポートが届きました</p>
           </div>
         ) : (
           <>
-            <h3 id="cheer-title">投げ銭で応援</h3>
+            <h3 id="cheer-title">応援チップを送る</h3>
             <p className="sub">
-              {teamName} を応援しよう（所持: 🪙 {currentUser.coins.toLocaleString()}）
+              {teamName} へのサポート（残高: {currentUser.coins.toLocaleString()}）
             </p>
 
             <div className="preset-grid">
@@ -71,9 +70,8 @@ export function CheerModal({
                     setMessage(p.label)
                   }}
                 >
-                  <div style={{ fontSize: '1.4rem' }}>{p.emoji}</div>
                   <div>{p.label}</div>
-                  <div style={{ color: '#b45309' }}>{p.amount}</div>
+                  <div style={{ color: '#8a5a10', marginTop: 6 }}>{p.amount}</div>
                 </button>
               ))}
             </div>
@@ -84,21 +82,21 @@ export function CheerModal({
                 id="cheer-msg"
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
-                maxLength={40}
-                placeholder="がんばれ！"
+                maxLength={60}
+                placeholder="応援メッセージ"
               />
             </div>
 
             {error && (
-              <p style={{ color: 'var(--coral)', fontWeight: 700, marginTop: 0 }}>{error}</p>
+              <p style={{ color: 'var(--danger)', fontWeight: 700, marginTop: 0 }}>{error}</p>
             )}
 
             <div style={{ display: 'flex', gap: 10 }}>
               <button type="button" className="btn btn-ghost btn-block" onClick={onClose}>
-                やめる
+                キャンセル
               </button>
               <button type="button" className="btn btn-coral btn-block" onClick={submit}>
-                🪙 {amount} 送る
+                {amount} を送る
               </button>
             </div>
           </>
